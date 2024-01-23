@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="7.0.400" />
+    <PackageReference Include="Npgsql" Version="7.0.6" />
+    <PackageReference Include="SQLProvider" Version="1.3.23" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.3" GeneratePathProperty="true" />
+  </ItemGroup>
+
+  <Target Name="CopyDBLibs" BeforeTargets="BeforeBuild">
+    <Copy SourceFiles="$(PkgMicrosoft_Extensions_Logging_Abstractions)/lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll"
+          DestinationFolder="$(MSBuildThisFileDirectory)/obj/db-libs/"
+          UseSymbolicLinksIfPossible="True" />
+  </Target>
+</Project>
